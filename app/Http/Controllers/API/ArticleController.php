@@ -30,11 +30,11 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->first();
+        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->get();
         if (!$article) {
             return response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
         }
-        return response()->json(['status' => 'success', 'article' => $article], 201);
+        return response()->json(['status' => 'success', 'data' => $article], 201);
     }
 
 
