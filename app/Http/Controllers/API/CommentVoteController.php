@@ -33,6 +33,6 @@ class CommentVoteController extends Controller
     {
         $comments = Comment::with('user')->where('article_id', $id)->get();
 
-        return response()->json(['status' => 'success', 'message' => 'Comments retrieved', 'comments' => $comments], 200);
+        return response()->json(['status' => 'success', 'message' => 'Comments retrieved', 'data' => $comments], 200);
     }
 }
