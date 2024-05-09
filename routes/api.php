@@ -23,6 +23,6 @@ Route::group(['prefix' => '/article'], function () {
 
 Route::group(['prefix', '/cast'], function () {
     Route::get('/{id}', [CommentVoteController::class, 'getComments']);
-    Route::post('/comment' . [CommentVoteController::class, 'comment']);
+    Route::post('/comment', [CommentVoteController::class, 'comment']);
     Route::post('/vote', [CommentVoteController::class, 'vote']);
 });
