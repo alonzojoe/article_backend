@@ -23,7 +23,7 @@ class CommentVoteController extends Controller
     public function vote(Request $request)
     {
         Vote::create([
-            'article_id' => $request->artcle_id, 'user_id' => $request->user_id
+            'article_id' => $request->article_id, 'user_id' => $request->user_id
         ]);
 
         return response()->json(['status' => 'success', 'message' => 'Vote added'], 201);
