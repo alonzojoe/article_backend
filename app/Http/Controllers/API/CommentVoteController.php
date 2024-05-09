@@ -9,6 +9,10 @@ use App\Models\Vote;
 
 class CommentVoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function comment(Request $request)
     {
         $comment = Comment::create([
@@ -31,7 +35,7 @@ class CommentVoteController extends Controller
 
     public function getComments($id)
     {
-        $comments = Comment::with('user')->where('article_id', $id)->get();
+        $comments = Comment::with('user')->where('article_id', $id)->orderBy('id', 'desc')->get();
 
         return response()->json(['status' => 'success', 'message' => 'Comments retrieved', 'data' => $comments], 200);
     }
