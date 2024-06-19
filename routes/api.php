@@ -22,7 +22,7 @@ Route::group(['prefix' => '/article'], function () {
     Route::delete('/{id}', [ArticleController::class, 'destroy']);
 });
 
-Route::group(['prefix', '/cast'], function () {
+Route::group(['prefix' => '/cast'], function () {
     Route::get('/{id}', [CommentVoteController::class, 'getComments']);
     Route::post('/comment', [CommentVoteController::class, 'comment']);
     Route::post('/vote', [CommentVoteController::class, 'vote']);

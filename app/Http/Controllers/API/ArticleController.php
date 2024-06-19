@@ -8,11 +8,15 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
 
     public function index()
     {
         $articles = Article::with('user', 'comments', 'votes')->orderBy('created_at', 'desc')->get();
-        return response()->json(['status' => 'success', 'articles' => $articles, 200]);
+        return response()->json(['status' => 'success', 'data' => $articles, 200]);
     }
 
 
@@ -30,11 +34,11 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->first();
+        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->get();
         if (!$article) {
             return response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
         }
-        return response()->json(['status' => 'success', 'article' => $article], 201);
+        return response()->json(['status' => 'success', 'data' => $article], 201);
     }
 
 
