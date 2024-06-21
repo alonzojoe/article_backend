@@ -5,13 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\CommentVoteController;
-
+use App\Http\Controllers\API\UserController;
 
 Route::group(['prefix' => '/auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/me', [AuthController::class, 'me']);
+    Route::patch('/update/:id', [UserController::class, 'updateProfile']);
+    Route::patch('/change/:id', [UserController::class, 'changePassword']);
 });
 
 Route::group(['prefix' => '/article'], function () {
