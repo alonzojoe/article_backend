@@ -9,12 +9,20 @@ class Article extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'title',
         'content',
         'photo',
         'user_id'
     ];
+
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute()
+    {
+        return $this->photo ? url('storage/' . $this->photo) : null;
+    }
 
     public function user()
     {

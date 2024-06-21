@@ -35,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected $appends = ['profile_url'];
     /**
      * The attributes that should be cast.
      *
@@ -44,6 +45,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function getProfileUrlAttribute()
+    {
+        return $this->profile ? url('storage' . $this->profile) : null;
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -52,5 +58,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
