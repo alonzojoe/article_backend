@@ -22,11 +22,29 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_id' => 'required|exists:users,id'
+        ]);
+
+        $photoPath = null;
+
+        if ($request->hasFile('photo')) {
+
+            $photoPath = $request->file('photo')->store('posts', 'public');
+        }
+
         $article = Article::create([
             'title' => $request->title,
             'content' => $request->content,
+            'photo' => $photoPath,
             'user_id' => $request->user_id
         ]);
+
+
+        $article->photo = $article->photo ? url('storage/' . $article->photo) : null;
 
         return response()->json(['status' => 'success', 'articles' => $article], 201);
     }
