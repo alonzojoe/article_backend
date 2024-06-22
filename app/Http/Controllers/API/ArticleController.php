@@ -25,7 +25,7 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'user_id' => 'required|exists:users,id'
         ]);
 
