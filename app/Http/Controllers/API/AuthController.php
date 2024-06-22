@@ -75,4 +75,9 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json(['status' => 'success', 'user' => $user], 200);
     }
+
+    public function checkSession()
+    {
+        return response()->json(['status' => 'success', 'data' => 'h0-_J1I3HwkIFgoqGJ6UM7DWw3V63ok1rZg-H5mQeNo'], 200);
+    }
 }

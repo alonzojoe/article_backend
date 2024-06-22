@@ -14,6 +14,7 @@ Route::group(['prefix' => '/auth'], function () {
     Route::post('/me', [AuthController::class, 'me']);
     Route::patch('/update/:id', [UserController::class, 'updateProfile']);
     Route::patch('/change/:id', [UserController::class, 'changePassword']);
+    Route::get('/session', [AuthController::class, 'checkSession']);
 });
 
 Route::group(['prefix' => '/article'], function () {
