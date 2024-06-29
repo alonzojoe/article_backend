@@ -52,7 +52,7 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->get();
+        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->first();
         if (!$article) {
             return response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
         }
