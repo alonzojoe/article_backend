@@ -19,6 +19,7 @@ Route::group(['prefix' => '/auth'], function () {
 
 Route::group(['prefix' => '/article'], function () {
     Route::get('/', [ArticleController::class, 'index']);
+    Route::get('/user/{id}', [ArticleController::class, 'userArticles']);
     Route::post('/create', [ArticleController::class, 'store']);
     Route::get('/{id}', [ArticleController::class, 'show']);
     Route::patch('/{id}', [ArticleController::class, 'update']);
