@@ -18,9 +18,10 @@ class UserController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
+
         $request->validate([
-            'name' => 'string|required',
-            'profile' => 'img|mines:jpeg,jpg,png,gif,svg|max:5120',
+            'name' => 'required|string|min:3',
+            'profile' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
         ]);
 
         $user = User::findOrFail($id);

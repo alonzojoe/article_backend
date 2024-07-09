@@ -52,7 +52,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $user->profile = $user->profile ? url('storage/' . $user->profile) : null;
+
         return response()->json([
             'status' => 'success',
             'message' => 'Login successfully',
