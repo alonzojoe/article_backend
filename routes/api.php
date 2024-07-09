@@ -12,8 +12,8 @@ Route::group(['prefix' => '/auth'], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/me', [AuthController::class, 'me']);
-    Route::patch('/update/:id', [UserController::class, 'updateProfile']);
-    Route::patch('/change/:id', [UserController::class, 'changePassword']);
+    Route::patch('/update/{id}', [UserController::class, 'updateProfile']);
+    Route::patch('/change/{id}', [UserController::class, 'changePassword']);
     Route::get('/session', [AuthController::class, 'checkSession']);
 });
 
