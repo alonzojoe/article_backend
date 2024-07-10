@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $request->validate([
             'old_password' => 'required|string',
-            'new_password' => 'reuired|string|min:6'
+            'new_password' => 'required|string|min:6'
         ]);
 
         $user = User::findOrFail($id);
