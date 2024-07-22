@@ -13,11 +13,31 @@ class ArticleController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::with('user', 'comments', 'votes')->orderBy('created_at', 'desc')->get();
-        return response()->json(['status' => 'success', 'data' => $articles], 200);
+        $search = $request->input('search');
+
+        $query = Article::with('user', 'comments', 'votes')->orderBy('created_at', 'desc');
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('content', 'like', '%' . $search . '%');
+            });
+        }
+
+        $articles = $query->paginate(10);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $articles->items(),
+            'total' => $articles->total(),
+            'current_page' => $articles->currentPage(),
+            'last_page' => $articles->lastPage(),
+            'is_bottom' => $articles->currentPage() === $articles->lastPage()
+        ], 200);
     }
+
 
     public function userArticles($id)
     {
