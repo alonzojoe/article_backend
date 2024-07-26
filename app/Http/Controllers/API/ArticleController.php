@@ -41,7 +41,7 @@ class ArticleController extends Controller
 
     public function userArticles($id)
     {
-        $articles = Article::with('user', 'comments', 'votes')->where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        $articles = Article::with('user', 'comments.user', 'votes')->where('user_id', $id)->orderBy('created_at', 'desc')->get();
         return response()->json(['status' => 'success', 'data' => $articles], 200);
     }
 
@@ -78,7 +78,7 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::with('user', 'comments', 'votes')->where('id', $id)->first();
+        $article = Article::with('user', 'comments.user', 'votes')->where('id', $id)->first();
         if (!$article) {
             return response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
         }
