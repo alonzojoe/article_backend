@@ -39,4 +39,13 @@ class CommentVoteController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Comments retrieved', 'data' => $comments], 200);
     }
+
+    public function downVote(Request $request, $id)
+    {
+        Vote::where('article_id', $id)
+            ->where('user_id', $request->user_id)
+            ->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Vote deleted'], 200);
+    }
 }
