@@ -30,5 +30,5 @@ Route::group(['prefix' => '/cast'], function () {
     Route::get('/{id}', [CommentVoteController::class, 'getComments']);
     Route::post('/comment', [CommentVoteController::class, 'comment']);
     Route::post('/vote', [CommentVoteController::class, 'vote']);
-    Route::delete('/down-vote', [CommentVoteController::class, 'downVote']);
+    Route::delete('/down-vote/{id}', [CommentVoteController::class, 'downVote']);
 });
