@@ -15,6 +15,7 @@ Route::group(['prefix' => '/auth'], function () {
     Route::patch('/update/{id}', [UserController::class, 'updateProfile']);
     Route::patch('/change/{id}', [UserController::class, 'changePassword']);
     Route::get('/session', [AuthController::class, 'checkSession']);
+    Route::get('/verify/{type}', [AuthController::class, 'verify']);
 });
 
 Route::group(['prefix' => '/article'], function () {

@@ -80,4 +80,9 @@ class AuthController extends Controller
     {
         return response()->json(['status' => 'success', 'data' => 'h0-_J1I3HwkIFgoqGJ6UM7DWw3V63ok1rZg-H5mQeNo'], 200);
     }
+
+    public function verify($type)
+    {
+        return response()->json(['status' => 'success', 'data' => 'HwkIFgoqGh0-1I3-H5mQeNHwkIF7DWw3V63ok1__rZgo' . $type], 200);
+    }
 }
